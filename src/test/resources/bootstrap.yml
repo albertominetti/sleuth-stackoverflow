@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    consul:
+      enabled: false
+    loadbalancer:
+      retry:
+        enabled: false
