@@ -59,6 +59,7 @@ class DemoApplicationTests {
                 )
         );
 
+        // calling several times the feign client
         sampleClient.findInstrumentById("1234");
         sampleClient.findInstrumentById("1234");
         sampleClient.findInstrumentById("1234");
@@ -67,6 +68,7 @@ class DemoApplicationTests {
 
         assertThat(client, is(notNullValue()));
         assertThat(client, is(instanceOf(LoadBalancerFeignClient.class)));
+        assertThat(client, is(instanceOf(WrapperLoadBalancerFeignClient.class))); // check if it is my wrapper
 
         LoadBalancerFeignClient balancer = (LoadBalancerFeignClient) this.client;
 
@@ -139,7 +141,7 @@ class DemoApplicationTests {
          * at org.springframework.cloud.sleuth.instrument.web.client.feign.LazyTracingFeignClient.execute(LazyTracingFeignClient.java:60)
          * ...
          */
-    void stackOverflow() throws IllegalAccessException, NoSuchFieldException {
+    void stackOverflow() {
         wireMockServer.stubFor(get(urlEqualTo("/instruments/1234"))
                 .willReturn(aResponse()
                         .withStatus(200)
@@ -149,10 +151,10 @@ class DemoApplicationTests {
 
         for (int i = 0; i < 10000; i++) {
             sampleClient.findInstrumentById("1234");
+            // for each new call to the feign client, a new decorator is added, till the StackOverflowError
         }
 
     }
-
 
     @TestConfiguration
     static class ContextConfig {
