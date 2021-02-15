@@ -111,36 +111,6 @@ class DemoApplicationTests {
 
 
     @Test
-    @Disabled
-        /*
-         * this throws the StackOverflowError
-         * java.lang.StackOverflowError
-         * at java.base/java.lang.StringBuilder.append(StringBuilder.java:173)
-         * at java.base/sun.net.www.ParseUtil.appendAuthority(ParseUtil.java:416)
-         * at java.base/sun.net.www.ParseUtil.appendSchemeSpecificPart(ParseUtil.java:383)
-         * at java.base/sun.net.www.ParseUtil.toString(ParseUtil.java:345)
-         * at java.base/sun.net.www.ParseUtil.createURI(ParseUtil.java:323)
-         * at java.base/sun.net.www.ParseUtil.toURI(ParseUtil.java:300)
-         * at java.base/sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1178)
-         * at java.base/sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1082)
-         * at java.base/sun.net.www.protocol.http.HttpURLConnection.connect(HttpURLConnection.java:1016)
-         * at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1600)
-         * at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1528)
-         * at java.base/java.net.HttpURLConnection.getResponseCode(HttpURLConnection.java:527)
-         * at feign.Client$Default.convertResponse(Client.java:108)
-         * at feign.Client$Default.execute(Client.java:104)
-         * at org.springframework.cloud.sleuth.instrument.web.client.feign.TracingFeignClient.execute(TracingFeignClient.java:81)
-         * at org.springframework.cloud.sleuth.instrument.web.client.feign.LazyTracingFeignClient.execute(LazyTracingFeignClient.java:60)
-         * at org.springframework.cloud.sleuth.instrument.web.client.feign.TracingFeignClient.execute(TracingFeignClient.java:81)
-         * at org.springframework.cloud.sleuth.instrument.web.client.feign.LazyTracingFeignClient.execute(LazyTracingFeignClient.java:60)
-         * at org.springframework.cloud.sleuth.instrument.web.client.feign.TracingFeignClient.execute(TracingFeignClient.java:81)
-         * at org.springframework.cloud.sleuth.instrument.web.client.feign.LazyTracingFeignClient.execute(LazyTracingFeignClient.java:60)
-         * at org.springframework.cloud.sleuth.instrument.web.client.feign.TracingFeignClient.execute(TracingFeignClient.java:81)
-         * at org.springframework.cloud.sleuth.instrument.web.client.feign.LazyTracingFeignClient.execute(LazyTracingFeignClient.java:60)
-         * at org.springframework.cloud.sleuth.instrument.web.client.feign.TracingFeignClient.execute(TracingFeignClient.java:81)
-         * at org.springframework.cloud.sleuth.instrument.web.client.feign.LazyTracingFeignClient.execute(LazyTracingFeignClient.java:60)
-         * ...
-         */
     void stackOverflow() {
         wireMockServer.stubFor(get(urlEqualTo("/instruments/1234"))
                 .willReturn(aResponse()
